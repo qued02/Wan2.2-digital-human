@@ -72,4 +72,4 @@ This provides an effective solution for extending large-scale animation diffusio
 📍 **Place inference UI screenshot here**
 
 ```text
-![Front Page1](https://github.com/qued02/Wan2.2-digital-human/blob/main/asset/%E4%BD%BF%E7%94%A8%E7%95%8C%E9%9D%A2.png)
+![Front Page1](https://github.com/qued02/Wan2.2-digital-human/blob/main/asset/%E4%BD%BF%E7%94%A8%E7%95%8C%E9%9D%A2.png?raw=true)
