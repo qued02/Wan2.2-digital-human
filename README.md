@@ -1,0 +1,1 @@
+# Wan2.2-digital-human
