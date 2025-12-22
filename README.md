@@ -69,5 +69,5 @@ This provides an effective solution for extending large-scale animation diffusio
 ### 🖥️ Inference Frontend
 > *Interactive animation generation and visualization interface*
 
-![Inference UI](https://github.com/qued02/Wan2.2-digital-human/blob/main/asset/%E4%BD%BF%E7%94%A8%E7%95%8C%E9%9D%A2.png?raw=true)
+![Training UI](https://github.com/qued02/Wan2.2-digital-human/blob/main/asset/%E8%AE%AD%E7%BB%83%E9%A1%B5%E9%9D%A2.png?raw=true)
 
