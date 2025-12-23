@@ -1,0 +1,2 @@
+import start 
+start.main()
