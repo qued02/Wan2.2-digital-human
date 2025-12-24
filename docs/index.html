@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Culture Digital Human: based on Wan2.2-, a DiT-based human animation framework, with hybrid guidance to achieve fine-grained holistic controllability, multi-scale adaptability, and long-term temporal coherence.">
+  <meta name="keywords" content="Animation, Diffusion Transformer, Video Generation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Culture Digital Human: based on Wan2.2-, a DiT-based human animation framework, with hybrid guidance to achieve
+    fine-grained holistic controllability, multi-scale adaptability, and long-term temporal coherence.</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <style>
+    .section {
+      margin-top: 0rem;
+      /* 增加章节之间的间距 */
+      margin-bottom: 0rem;
+      /* 增加章节之间的间距 */
+    }
+
+    .content {
+      margin-bottom: 0rem;
+      /* 减小章节内的间距 */
+    }
+
+    h2.title {
+      margin-bottom: 0rem;
+      /* 恢复章节标题和正文之间的间距 */
+    }
+
+    #diversity1,
+    #diversity2,
+    #diversity3,
+    #diversity4 {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      object-position: center;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-2 publication-title"><span class="rainbow-text">Culture Digital Human</span>: Based on
+              Wan2.2,
+              Unified Character Animation and Replacement with Holistic Replication, Multi-scale Adaptability, and
+              Long-Term Temporal Coherence.</h1>
+            <h1 class="title is-4 publication-title">Digital Human Team </h1>
+            <div class="is-size-5 publication-authors">
+
+              <span class="author-block">
+                <a href="www.github/qued02.com">Shihan Qu</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Wei Zheng</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Haoyu Hu</a><sup>*</sup>,
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Communication Uni of China</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="eql-cntrb"><Small><sup>*</sup>Course Work</Small></span>
+              <span class="eql-cntrb"><Small><sup>†</sup>Corresponding Author</Small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> -->
+                <!-- Dataset Link. -->
+                <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-fullhd">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-justified">
+          <p>
+            We have trained a video generation model for images, which converts static pictures
+            into dynamic video content by analyzing the image's content, structure, and latent
+            motion patterns. The training data is based on the style of traditional Chinese culture,
+            aiming to blend tradition with modernity and promote cultural dissemination.
+          </p>
+        </h2>
+
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <video id="teaser1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser2" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser3" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser4" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/4.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser5" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser6" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/6.mp4" type="video/mp4">
+            </video>
+          </div>
+          <!-- <div class="item">
+          <video id="teaser7" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/7.mp4" type="video/mp4">
+          </video>
+        </div> -->
+          <div class="item">
+            <video id="teaser8" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/8.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser9" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/9.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser10" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/10.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser11" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/11.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser12" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/12.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser10" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/13.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser11" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/14.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video id="teaser12" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/15.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-4">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce Wan-Animate, a unified framework for character animation and replacement.
+              Given a character image and a reference video, Wan-Animate can animate the character
+              by precisely replicating the expressions and mp4ements of the character in the video
+              to generate high-fidelity character videos. Alternatively, it can integrate the animated
+              character into the reference video to replace the original character, replicating the scene's
+              lighting and color tone to achieve seamless environmental integration. Wan-Animate is built
+              upon the Wan model. To adapt it for character animation tasks, we employ a modified input
+              paradigm to differentiate between reference conditions and regions for generation. This design
+              unifies multiple tasks into a common symbolic representation. We use spatially-aligned skeleton
+              signals to replicate body motion and implicit facial features extracted from source images to reenact
+              expressions, enabling the generation of character videos with high controllability and expressiveness.
+              Furthermore, to enhance environmental integration during character replacement, we develop an auxiliary
+              Relighting LoRA. This module preserves the character's appearance consistency while applying the
+              appropriate
+              environmental lighting and color tone. Experimental results demonstrate that Wan-Animate achieves
+              state-of-the-art
+              performance. We are committed to open-sourcing the model weights and its source code. </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Method Illustration. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-4">Method Overview</h2>
+          <img src="./static/images/2-overview.png" class="interpolation-image"
+            alt="Interpolate start reference image." />
+          <div class="content has-text-justified">
+            <p>
+              Overview of <span class="dnerf">Culture Digital Human</span>. Overview of Wan-Animate, which is built upon
+              Wan-I2V. We modify it
+              s input formulation to unify reference image input, temporal frame guidance, and environmental information
+              (for dual-mode compatibility)
+              under a common symbolic representation. For body motion control, we use skeleton signals that are merged
+              via spatial alignment. For facial
+              expression control, we leverage implicit features extracted from face images as the driving signal.
+              Additionally, for character replacement,
+              we train an auxiliary Relighting LoRA to enhance the character's integration with the new environment.
+            </p>
+          </div>
+        </div>
+        <!--/ Method Illustration. -->
+
+        <!-- Paper video. -->
+        <!--     <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+        <!--/ Paper video. -->
+      </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-fullhd">
+      <!-- Culturally-Styled Videos -->
+      <h2 class="title is-3">Culturally-Styled Videos</h2>
+      <div class="content has-text-justified">
+        <p class="is-size-4">
+          Our model is trained on a cultural database and excels at generating culturally-styled videos.
+        </p>
+      </div>
+
+      <div id="diversity-carousel" class="carousel results-carousel">
+        <div class="item">
+          <video id="diversity1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/diversity-1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="diversity2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/diversity-2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="diversity3" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/diversity-3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="diversity4" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/diversity-4.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="diversity5" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/diversity-5.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="diversity6" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/diversity-6.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="diversity7" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/diversity-7.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="diversity8" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/diversity-8.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <!-- culturally-styled videos -->
+      <h2 class="title is-3" style="margin-top: 4rem;">Advantages</h2>
+
+      <div id="control-carousel" class="carousel results-carousel">
+        <!-- Unit 1 -->
+        <div class="item control-item">
+          <div class="content has-text-justified">
+            <p class="is-size-4">
+              Our model can detect human skeletons to generate dynamic images.
+            </p>
+          </div>
+          <video id="control1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/control-1.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Unit 4 -->
+        <div class="item control-item">
+          <div class="content has-text-justified">
+            <p class="is-size-4">
+              Our model can flexibly choose to use either an image or a video as the background.
+            </p>
+          </div>
+          <video id="control4" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/control-4.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Unit 2 -->
+        <div class="item control-item">
+          <div class="content has-text-justified">
+            <p class="is-size-4">
+              Our model can output audio.
+            </p>
+          </div>
+          <video id="control2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/control-2.mp4" type="video/mp4">
+          </video>
+
+          <h2 class="title is-3" style="margin-top: 1rem;">Comparing to SOTA Methods</h2>
+
+          <!-- 添加描述文字 -->
+          <div class="content has-text-justified">
+            <p class="is-size-4">
+              Our method generates results with fine-grained motions, identity preservation, temporal consistency and
+              high
+              fidelity.
+            </p>
+          </div>
+
+          <!-- Pose Transfer -->
+          <h2 class="title is-4">Pose Transfer</h2>
+
+          <div id="pose-carousel" class="carousel results-carousel">
+            <div class="item">
+              <video id="pose1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/pose-1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="item">
+              <video id="pose2" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/pose-2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="item">
+              <video id="pose3" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/pose-3.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+
+          <!-- Portrait Animation -->
+          <h2 class="title is-4" style="margin-top: 3rem;">Portrait Animation</h2>
+
+          <div id="portrait-carousel" class="carousel results-carousel">
+            <div class="item">
+              <video id="portrait1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/portrait-1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="item">
+              <video id="portrait2" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/portrait-2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="item">
+              <video id="portrait3" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/portrait-3.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+  </section>
+
+
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{luo2025dreamactor,
+  title={Culture Digital Human: Holistic, Expressive and Robust Human Image Animation with Hybrid Guidance},
+  author={Luo, Yuxuan and Rong, Zhengkun and Wang, Lizhen and Zhang, Longhao and Hu, Tianshu and Zhu, Yongming},
+  journal={arXiv preprint arXiv:2504.01724},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <h2 class="title is-4">Ethics Concerns</h2>
+            <p>
+              The images and videos used in demos are sourced from public domains or generated by models, and are
+              intended solely to showcase the capabilities of this research. Please contact us (hutianshu007@gmail.com)
+              if there are any concerns, and we will delete it in time.
+            </p>
+
+            <h2 class="title is-4">Acknowledgement</h2>
+            <p>
+              We extend our sincere gratitude to Shanchuan Lin, Lu Jiang, Zhurong Xia, Jianwen Jiang, Zerong Zheng, Chao
+              Liang, Youjiang Xu, Ming Zhou, Tongchun Zuo, Xin Dong and Yanbo Zheng for their invaluable contributions
+              and supports to this research work.
+              We would like to thank <a href="https://nerfies.github.io/">Nerfies</a> for providing the website
+              template.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
+
+
+<!-- <footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.mp4">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remp4e the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html> -->
