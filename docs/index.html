@@ -168,8 +168,8 @@
           <p>
             We have trained a video generation model for images, which converts static pictures
             into dynamic video content by analyzing the image's content, structure, and latent
-            motion patterns. The training data is based on the style of traditional Chinese culture,
-            aiming to blend tradition with modernity and promote cultural dissemination.
+            motion patterns. We also designed and implemented a dual-stage LoRA fine-tuning strategy 
+            to improve the Wan2.2-Animate 14B model’s performance on 2D character animation and long-range motion generation
           </p>
         </h2>
 
@@ -304,8 +304,11 @@
               via spatial alignment. For facial
               expression control, we leverage implicit features extracted from face images as the driving signal.
               Additionally, for character replacement,
-              we train an auxiliary Relighting LoRA to enhance the character's integration with the new environment.
-            </p>
+              we train an auxiliary Relighting LoRA to enhance the character's integration with the new environment.</p>
+           <img src="./static/images/3-overview.png" class="interpolation-image"
+            alt="Interpolate start reference image." />  
+    
+            
           </div>
         </div>
         <!--/ Method Illustration. -->
@@ -328,7 +331,7 @@
   <section class="section">
     <div class="container is-fullhd">
       <!-- Culturally-Styled Videos -->
-      <h2 class="title is-3">Culturally-Styled Videos</h2>
+      <h2 class="title is-3"> Diversity-Styled Videos</h2>
       <div class="content has-text-justified">
         <p class="is-size-4">
           Our model is trained on a cultural database and excels at generating culturally-styled videos.
@@ -554,3 +557,4 @@
 
 </body>
 </html> -->
+
