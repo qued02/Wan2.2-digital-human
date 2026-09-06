@@ -1,0 +1,55 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+/py310/
+**/python310/
+/third_party/
+/Wan2.2-Animate-14B/
+/torch/
+/modelscope/
+/nltk_data/
+
+# Third-party source checkouts kept locally only
+/sam2/
+/Studio Training(linux)/
+/Wan2.2_Training/
+
+# Generated output and temporary files
+/output/
+**/output/
+/outputs/
+/temp/
+**/cache/
+**/checkpoints/
+**/._____temp/
+*.log
+*.arrow
+
+# Downloaded model weights and training checkpoints
+*.safetensors
+*.ckpt
+*.pth
+*.pt
+*.onnx
+/Wan2.2_Training/models/Wan-AI/
+
+# Build/editor artifacts
+build/
+dist/
+.git.local-preserve/
+.idea/
+.vscode/
+node_modules/
+
+# Accidental duplicated GitHub Pages tree
+/docs/static/static/
+
+# Platform metadata
+.DS_Store
+Thumbs.db

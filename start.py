@@ -36,6 +36,7 @@ python_paths = [
 ]
 os.environ["PYTHONPATH"] = ";".join(python_paths)
 
+
 import sys
 import uuid
 import shutil
@@ -51,7 +52,14 @@ from moviepy import *
 # 添加当前目录到Python路径
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+#检查模型文件
 
+#从魔塔社区下载模型
+print("检查模型...")
+model_name = "Wan-AI/Wan2.2-Animate-14B"
+local_dir = "./Wan2.2-Animate-14B"
+
+model_dir = snapshot_download(model_name, local_dir=local_dir)
 
 #合成最终视频
 def DiffSynth_generate_video(mode,inputimage,animateposevideo,animatefacevideo,animate_inpaint_video,animate_mask_video,num_frames,height,width,inference_step,final_video_path,final_fps):
@@ -92,7 +100,12 @@ def DiffSynth_generate_video(mode,inputimage,animateposevideo,animatefacevideo,a
             num_frames=num_frames, height=height, width=width,
             num_inference_steps=inference_step, cfg_scale=1,
         )
-        save_video(video,final_video_path, fps=final_fps, quality=5)              
+        save_video(video, final_video_path, fps=final_fps, quality=5)
+        # 释放GPU
+        del video
+        torch.cuda.synchronize()
+        torch.cuda.empty_cache()
+
     
     else:
         # Replace 人物替换模式
@@ -115,6 +128,10 @@ def DiffSynth_generate_video(mode,inputimage,animateposevideo,animatefacevideo,a
             num_inference_steps=inference_step, cfg_scale=1,
         )
         save_video(video, final_video_path, fps=final_fps, quality=5)
+        # 释放GPU
+        del video
+        torch.cuda.synchronize()
+        torch.cuda.empty_cache()
         
         
     # 查找生成的视频文件
@@ -238,7 +255,7 @@ class WanAnimateApp:
             num_frames=adjust_fps_number(frame_count)
             height=resolution_height
             width=resolution_width
-            inference_step=20
+            inference_step=15
             current_time = datetime.now().strftime("%Y%m%d%H%M%S")
             final_video_path="./output/"+current_time+".mp4"
             #获取视频帧率
@@ -307,7 +324,7 @@ def create_gradio_interface():
     
     with gr.Blocks(title="Wan2.2-Animate 视频生成工具", theme=gr.themes.Ocean()) as demo:
         gr.Markdown("# 🎬 Wan2.2-Animate-14B 动作模仿及人物替换视频生成工具")
-        gr.Markdown("### 数字人 made by Shihan Qu")
+        gr.Markdown("## 数字人Digtial Human：Qushihan   Huhaoyu   Zhengwei")
         with gr.Tabs():
             with gr.TabItem("动画模式"):
                 with gr.Row():
@@ -476,13 +493,5 @@ def main():
     )
 
 if __name__ == "__main__":
-    try:
     #start_app()
-        main()
-    except Exception as e:
-        with open("error.log", "w") as f:
-            f.write(traceback.format_exc())
-        print("程序崩溃，错误信息已保存到error.log")
-        # 也可以选择将错误打印出来
-        traceback.print_exc(file=sys.stdout)
-        sys.exit(1)
+    main()
