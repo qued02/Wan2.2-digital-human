@@ -1,28 +1,77 @@
-# 双 LoRA 训练复现
+# Dual-LoRA Training
 
-本目录只保存本项目的训练策略与命令，不复制 DiffSynth Studio、diffusion-pipe、基础模型、数据集或训练输出。
+This directory contains executable training code for the project's two noise-specialized LoRAs. It depends on the official [DiffSynth Studio](https://github.com/modelscope/DiffSynth-Studio) package instead of vendoring that repository.
 
-## 环境
+## Files
 
-先按仓库根目录 [INSTALL.md](../INSTALL.md) 安装依赖。Linux 训练后端使用官方 [DiffSynth Studio](https://github.com/modelscope/DiffSynth-Studio)，并固定到安装文档中的提交。
+- `train_wan22_lora.py`: the project-owned training entry point. It builds the dataset, configures the Wan pipeline, injects LoRA layers, validates the selected noise branch, and launches training.
+- `run_dual_lora.sh`: launches the high-noise and low-noise jobs sequentially with matching hyperparameters.
+- `metadata.example.csv`: a minimal dataset metadata example.
 
-## 数据格式
+## Setup
 
-准备视频数据目录与 `metadata.csv`。CSV 至少包含视频路径和文本描述，具体字段遵循 DiffSynth Studio 的 [Wan 训练文档](https://github.com/modelscope/DiffSynth-Studio/blob/main/docs/en/Model_Details/Wan.md)。数据、缓存和中间特征不要提交到 Git。
-
-## 双噪声区间训练
-
-编辑 `run_dual_lora.sh` 顶部的路径和训练参数，然后执行：
+Follow [`../INSTALL.md`](../INSTALL.md) first. The pinned DiffSynth Studio checkout must be installed into the active Python environment:
 
 ```bash
+pip install -e third_party/DiffSynth-Studio
+```
+
+Place training videos under one dataset directory and create a metadata CSV. Paths in the CSV are relative to `--dataset_base_path`.
+
+```csv
+video,prompt
+videos/clip_001.mp4,"A full-body character walks across a wide shot."
+```
+
+## Train both branches
+
+```bash
+export DATASET_BASE=/data/wan22
+export DATASET_METADATA=/data/wan22/metadata.csv
 bash training/run_dual_lora.sh
 ```
 
-脚本分别生成：
+The launcher creates:
 
-- `wan22_high_noise_lora`：面向全局姿态与远景运动；
-- `wan22_low_noise_lora`：面向二维角色面部和局部细节。
+- `outputs/wan22_high_noise_lora`: high-noise branch for global pose and long-range motion.
+- `outputs/wan22_low_noise_lora`: low-noise branch for faces and local details.
 
-两个任务应使用相同数据划分与基础模型版本，分别评估后再决定推理权重。训练输出默认在 `outputs/`，已被 `.gitignore` 排除。
+Override any path without editing the script:
 
-> DiffSynth Studio 对 Wan2.2 高/低噪声模型的边界解释依赖其内部时间步映射；脚本中的参数沿用上游 Wan2.2 I2V LoRA 示例。升级上游版本时应重新核对参数语义。
+```bash
+DIFFSYNTH_ROOT=/opt/DiffSynth-Studio \
+OUTPUT_ROOT=/data/experiments \
+bash training/run_dual_lora.sh
+```
+
+## Train one branch
+
+The Python entry point can be called directly:
+
+```bash
+accelerate launch training/train_wan22_lora.py \
+  --noise_branch high \
+  --dataset_base_path /data/wan22 \
+  --dataset_metadata_path /data/wan22/metadata.csv \
+  --model_id_with_origin_paths "Wan-AI/Wan2.2-I2V-A14B:high_noise_model/diffusion_pytorch_model*.safetensors,Wan-AI/Wan2.2-I2V-A14B:models_t5_umt5-xxl-enc-bf16.pth,Wan-AI/Wan2.2-I2V-A14B:Wan2.1_VAE.pth" \
+  --output_path outputs/wan22_high_noise_lora \
+  --height 480 --width 832 --num_frames 49 \
+  --lora_base_model dit --lora_rank 32 \
+  --extra_inputs input_image
+```
+
+`--noise_branch` sets and validates the correct model half and timestep interval:
+
+| Branch | Model directory | Boundary interval | Research target |
+| --- | --- | --- | --- |
+| `high` | `high_noise_model` | `[0.000, 0.358]` | global motion and distant poses |
+| `low` | `low_noise_model` | `[0.358, 1.000]` | facial and local-detail stability |
+
+These normalized boundaries follow DiffSynth Studio's Wan2.2 I2V example and its internal timestep mapping. Re-check them before upgrading the pinned upstream revision.
+
+## Reproducibility notes
+
+- Keep the dataset split, base-model revision, resolution, frame count, LoRA rank, and optimizer settings identical between branches.
+- Use `--seed` to record the experiment seed. GPU kernels can still introduce nondeterminism.
+- Checkpoints, cached latents, downloaded models, and outputs are intentionally ignored by Git.
+- Run `python training/train_wan22_lora.py --help` to inspect all upstream and project-specific options.
