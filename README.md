@@ -62,12 +62,5 @@ Our experiments demonstrate that the proposed method:
 
 This provides an effective solution for extending large-scale animation diffusion models to more diverse animation domains.
 
----
 
-## 🌐 Interactive Web Interfaces
-
-### 🖥️ Inference Frontend
-> *Interactive animation generation and visualization interface*
-
-![Training UI](https://github.com/qued02/Wan2.2-digital-human/blob/main/asset/%E8%AE%AD%E7%BB%83%E9%A1%B5%E9%9D%A2.png?raw=true)
 
